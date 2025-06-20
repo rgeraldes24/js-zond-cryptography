@@ -1,22 +1,16 @@
-import { abool as assertBool } from "@noble/curves/abstract/utils";
-import { abytes as assertBytes } from "@noble/hashes/_assert";
+// buf.toString('hex') -> toHex(buf)
+import assert from "@noble/hashes/_assert";
 import { hexToBytes as _hexToBytes } from "@noble/hashes/utils";
-
+const assertBool = assert.bool;
+const assertBytes = assert.bytes;
+export { assertBool, assertBytes };
 export {
   bytesToHex,
+  bytesToHex as toHex,
   concatBytes,
   createView,
-  bytesToHex as toHex,
   utf8ToBytes
 } from "@noble/hashes/utils";
-export { assertBool, assertBytes };
-
-// buf.toString('hex') -> toHex(buf)
-
-// Global symbols in both browsers and Node.js since v11
-// See https://github.com/microsoft/TypeScript/issues/31535
-declare const TextEncoder: any;
-declare const TextDecoder: any;
 
 // buf.toString('utf8') -> bytesToUtf8(buf)
 export function bytesToUtf8(data: Uint8Array): string {
@@ -46,8 +40,21 @@ export function equalsBytes(a: Uint8Array, b: Uint8Array): boolean {
 
 // Internal utils
 export function wrapHash(hash: (msg: Uint8Array) => Uint8Array) {
-  return (msg: Uint8Array): Uint8Array => {
-    assertBytes(msg);
+  return (msg: Uint8Array) => {
+    assert.bytes(msg);
     return hash(msg);
   };
 }
+
+export const crypto: { node?: any; web?: Crypto } = (() => {
+  const webCrypto =
+    typeof self === "object" && "crypto" in self ? self.crypto : undefined;
+  const nodeRequire =
+    typeof module !== "undefined" &&
+    typeof module.require === "function" &&
+    module.require.bind(module);
+  return {
+    node: nodeRequire && !webCrypto ? nodeRequire("crypto") : undefined,
+    web: webCrypto
+  };
+})();

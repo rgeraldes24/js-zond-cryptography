@@ -1,5 +1,5 @@
-import { pbkdf2 as pbkdf2Async, pbkdf2Sync } from "zond-cryptography/pbkdf2";
-import { toHex, utf8ToBytes } from "zond-cryptography/utils";
+import { pbkdf2 as pbkdf2Async, pbkdf2Sync } from "../../src/pbkdf2";
+import { toHex, utf8ToBytes } from "../../src/utils";
 import { deepStrictEqual } from "./assert";
 
 const TEST_VECTORS = [

@@ -1,5 +1,5 @@
-import { scrypt as scryptAsync, scryptSync } from "zond-cryptography/scrypt";
-import { hexToBytes, toHex } from "zond-cryptography/utils";
+import { scrypt as scryptAsync, scryptSync } from "../../src/scrypt";
+import { hexToBytes, toHex } from "../../src/utils";
 import { deepStrictEqual } from "./assert";
 
 const TEST_VECTORS = [

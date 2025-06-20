@@ -1,5 +1,5 @@
-import { getRandomBytes, getRandomBytesSync } from "zond-cryptography/random";
-import { equalsBytes } from "zond-cryptography/utils";
+import { getRandomBytes, getRandomBytesSync } from "../../src/random";
+import { equalsBytes } from "../../src/utils";
 import { deepStrictEqual } from "./assert";
 
 describe("Random number generation", () => {
