@@ -1,5 +1,5 @@
-import { keccak224, keccak256, keccak384, keccak512 } from "zond-cryptography/keccak";
-import { hexToBytes, toHex, utf8ToBytes } from "zond-cryptography/utils";
+import { keccak224, keccak256, keccak384, keccak512 } from "../../src/keccak";
+import { hexToBytes, toHex, utf8ToBytes } from "../../src/utils";
 import { deepStrictEqual } from "./assert";
 
 export const keccak224Vectors = [

@@ -8,34 +8,21 @@ jobs:
     name: v${{ matrix.node }} @ ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
-        include:
-          # @actions/setup-node does not support Node.js v14 for macOS
-          - node: 14
-            os: ubuntu-latest
-        node:
-          - 16.0.0
-          - 16
-          - 18.0.0
-          - 18
-          - 20
-          - 22
-        os:
-          - ubuntu-latest
-          - macOS-latest
+        node: [16, 18, 19]
+        os: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-        with:
-          persist-credentials: false
-      - name: Use Node.js ${{ matrix.node }}
-        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4
-        with:
-          node-version: ${{ matrix.node }}
-          registry-url: "https://registry.npmjs.org"
-      - run: npm install -g npm@9.x
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
-      - run: npm run browser-tests
-      - run: npm run lint --if-present
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node }}
+    - run: npm install
+    - name: Build and run tests
+      run: |
+        npm run build --if-present
+        npm test
+    - name: Run browser tests and lint
+      run: |
+        npm run browser-tests
+        npm run lint

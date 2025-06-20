@@ -1,85 +1,27 @@
 {
   "name": "zond-cryptography",
-  "version": "0.1.0",
-  "description": "All the cryptographic primitives used in Zond.",
+  "version": "1.0.0",
+  "description": "All the cryptographic primitives used in Ethereum",
+  "contributors": [
+    {
+      "name": "Patricio Palladino",
+      "email": "patricio@nomiclabs.io"
+    },
+    {
+      "name": "Paul Miller",
+      "url": "https://paulmillr.com"
+    }
+  ],
   "repository": "https://github.com/theQRL/js-zond-cryptography",
   "license": "MIT",
   "main": "./index.js",
-  "engines": {
-    "node": "^14.21.3 || >=16",
-    "npm": ">=9"
-  },
   "files": [
     "*.js",
-    "*.d.ts",
-    "esm"
+    "*.d.ts"
   ],
   "dependencies": {
-    "@noble/ciphers": "1.3.0",
-    "@noble/curves": "1.9.0",
+    "@noble/curves": "1.0.0",
     "@noble/hashes": "1.8.0"
-  },
-  "exports": {
-    ".": {
-      "import": "./esm/index.js",
-      "require": "./index.js"
-    },
-    "./aes": {
-      "import": "./esm/aes.js",
-      "require": "./aes.js"
-    },
-    "./index": {
-      "import": "./esm/index.js",
-      "require": "./index.js"
-    },
-    "./keccak": {
-      "import": "./esm/keccak.js",
-      "require": "./keccak.js"
-    },
-    "./pbkdf2": {
-      "import": "./esm/pbkdf2.js",
-      "require": "./pbkdf2.js"
-    },
-    "./random": {
-      "import": "./esm/random.js",
-      "require": "./random.js"
-    },
-    "./scrypt": {
-      "import": "./esm/scrypt.js",
-      "require": "./scrypt.js"
-    },
-    "./utils": {
-      "import": "./esm/utils.js",
-      "require": "./utils.js"
-    },
-    "./aes.js": {
-      "import": "./esm/aes.js",
-      "require": "./aes.js"
-    },
-    "./index.js": {
-      "import": "./esm/index.js",
-      "require": "./index.js"
-    },
-    "./keccak.js": {
-      "import": "./esm/keccak.js",
-      "require": "./keccak.js"
-    },
-    "./pbkdf2.js": {
-      "import": "./esm/pbkdf2.js",
-      "require": "./pbkdf2.js"
-    },
-    "./random.js": {
-      "import": "./esm/random.js",
-      "require": "./random.js"
-    },
-    "./scrypt.js": {
-      "import": "./esm/scrypt.js",
-      "require": "./scrypt.js"
-    },
-    "./utils.js": {
-      "import": "./esm/utils.js",
-      "require": "./utils.js"
-    }
   },
   "browser": {
     "crypto": false
@@ -88,10 +30,10 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "npm-run-all build:tsc",
-    "build:tsc": "tsc --project tsconfig.prod.json && tsc --project tsconfig.prod.esm.json",
+    "build:tsc": "tsc --project tsconfig.prod.json",
     "test": "npm-run-all test:node",
-    "test:node": "cd test && npm install && cd .. && mocha",
-    "clean": "rm -rf test/test-builds *.js *.js.map *.d.ts *.d.ts.map src/**/*.js",
+    "test:node": "mocha",
+    "clean": "rimraf test-builds '*.js' '*.js.map' '*.d.ts' '*.d.ts.map' 'src/**/*.js'",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "browser-tests": "npm-run-all browser-tests:build browser-tests:test",
@@ -103,24 +45,31 @@
     "browser-tests:test-rollup": "karma start --single-run --browsers ChromeHeadless test/karma.rollup.conf.js"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "22.0.1",
+    "@rollup/plugin-node-resolve": "13.3.0",
     "@types/estree": "1.0.0",
-    "@types/mocha": "10.0.7",
-    "@types/node": "22.14.1",
+    "@types/mocha": "9.1.1",
+    "@types/node": "18.15.11",
     "@typescript-eslint/eslint-plugin": "5.30.6",
     "@typescript-eslint/parser": "5.30.6",
+    "browserify": "17.0.0",
     "eslint": "8.38.0",
     "eslint-plugin-prettier": "4.2.1",
-    "karma": "6.4.4",
+    "karma": "6.4.0",
     "karma-chrome-launcher": "3.1.1",
     "karma-mocha": "2.0.1",
     "karma-mocha-reporter": "2.2.5",
-    "mocha": "10.7.3",
+    "mocha": "10.0.0",
     "npm-run-all": "4.1.5",
+    "parcel": "2.6.2",
     "prettier": "2.7.1",
+    "rimraf": "~3.0.2",
+    "rollup": "2.76.0",
     "ts-node": "10.9.1",
-    "typescript": "5.8.3"
+    "typescript": "5.0.2",
+    "webpack": "5.76.0",
+    "webpack-cli": "4.10"
   },
-  "packageManager": "npm@9.9.4",
   "keywords": [
     "zond",
     "cryptography",
@@ -132,7 +81,7 @@
     "scrypt",
     "pbkdf2",
     "aes",
-    "advanced encryption standard"
+    "advanced encryption standar"
   ],
   "targets": {
     "parcel_tests": {
